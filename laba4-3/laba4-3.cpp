@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <vector>
-#include <locale> // Для поддержки русской локализации
 
 using namespace std;
 
@@ -9,7 +8,7 @@ int main() {
     setlocale(LC_ALL, "Russian");
 
     int n;
-    cout << "Введите размерность массива (n x n): ";
+    cout << "Введите размерность массива n: ";
     cin >> n;
 
     // Создаем двумерный массив размером n x n

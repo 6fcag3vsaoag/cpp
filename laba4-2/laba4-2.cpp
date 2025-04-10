@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <vector>
-#include <limits> // Для использования numeric_limits
 
 using namespace std;
 
