@@ -3,68 +3,57 @@
 
 using namespace std;
 
-// Функция для подсчета количества смен знаков в массиве
-int countSignChanges(const vector<double>& arr) {
-    int changes = 0;
-    double prev_sign = 0.0;
-
-    for (double num : arr) {
-        double curr_sign = (num > 0) ? 1 : ((num < 0) ? -1 : 0);
-
-        if (prev_sign == 0 || curr_sign == 0) {
-            prev_sign = curr_sign;
-            continue;
-        }
-
-        if (curr_sign * prev_sign < 0) {
-            ++changes;
-        }
-
-        prev_sign = curr_sign;
+// Проверяет смену знака между двумя элементами
+bool isSignChange(double prev, double current) {
+    if ((prev >= 0 && current < 0) || (prev < 0 && current >= 0)) {
+        return true;
     }
-
-    return changes;
+    return false;
 }
 
-// Функция для вывода индексов, где меняется знак
-void printChangePositions(const vector<double>& arr) {
-    double prev_sign = 0.0;
-    size_t index = 0;
-
-    cout << "Позиции смены знака:" << endl;
-
-    for (double num : arr) {
-        double curr_sign = (num > 0) ? 1 : ((num < 0) ? -1 : 0);
-
-        if (prev_sign == 0 || curr_sign == 0) {
-            prev_sign = curr_sign;
-            ++index;
-            continue;
+// Определяет позиции изменений знака и выводит их
+void findAndPrintSignChanges(const vector<double>& arr) {
+    for (size_t i = 1; i < arr.size(); ++i) {
+        if (isSignChange(arr[i - 1], arr[i])) {
+            cout << "Изменение знака произошло на позиции " << i + 1 << endl;
         }
-
-        if (curr_sign * prev_sign < 0) {
-            cout << index << ", ";
-        }
-
-        prev_sign = curr_sign;
-        ++index;
     }
-
-    cout << endl;
 }
 
-// Основная функция
+// Основная функция для запуска процесса обработки массива
+void processArray(const vector<double>& inputData) {
+    size_t count = 0;
+    for (size_t i = 1; i < inputData.size(); ++i) {
+        if (isSignChange(inputData[i - 1], inputData[i])) {
+            count++;
+        }
+    }
+
+    cout << "Количество смен знаков: " << count << endl;
+    findAndPrintSignChanges(inputData);
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
 
-    vector<double> arr = { -1.5, 2.0, -3.1, 4.2, -5.3, 6.4, -7.5, 8.6, -9.7, 10.8 };
+    const size_t arraySize = 15;
+    vector<double> data(arraySize);
 
-    // Определяем количество изменений знака
-    int sign_changes = countSignChanges(arr);
-    cout << "Количество изменений знака: " << sign_changes << endl;
+    // Заполняем массив случайными числами (для примера)
+    srand(time(nullptr));
+    for (size_t i = 0; i < arraySize; ++i) {
+        data[i] = static_cast<double>(rand()) / RAND_MAX * 100 - 50; // Числа от -50 до 50
+    }
 
-    // Выводим позиции изменения знака
-    printChangePositions(arr);
+    // Выводим исходный массив
+    cout << "Исходный массив:" << endl;
+    for (const auto& val : data) {
+        cout << val << ' ';
+    }
+    cout << endl;
+
+    // Обрабатываем массив
+    processArray(data);
 
     return 0;
 }

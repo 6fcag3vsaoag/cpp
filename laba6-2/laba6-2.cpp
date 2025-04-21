@@ -3,6 +3,56 @@
 
 using namespace std;
 
+// Функция для ввода элементов вектора
+void inputVector(vector<int>& vec, int size, const string& name) {
+    cout << "Введите элементы массива " << name << " (" << size << " элементов): ";
+    for (int i = 0; i < size; ++i) {
+        cin >> vec[i];
+    }
+}
+
+// Функция для вычисления произведения (m_i - 1) для массива M
+double calcMProduct(const vector<int>& M, int size) {
+    double product = 1.0;
+    for (int i = 0; i < size; ++i) {
+        product *= (M[i] - 1);
+    }
+    return product;
+}
+
+// Функция для вычисления произведения (c_k - 5) для массива C
+double calcCProduct(const vector<int>& C, int size) {
+    double product = 1.0;
+    for (int k = 0; k < size; ++k) {
+        product *= (C[k] - 5);
+    }
+    return product;
+}
+
+// Функция для вычисления произведения l_j для массива L
+double calcLProduct(const vector<int>& L, int size) {
+    double product = 1.0;
+    for (int j = 0; j < size; ++j) {
+        product *= L[j];
+    }
+    return product;
+}
+
+// Функция для вычисления произведения m_i для массива M
+double calcMDirectProduct(const vector<int>& M, int size) {
+    double product = 1.0;
+    for (int i = 0; i < size; ++i) {
+        product *= M[i];
+    }
+    return product;
+}
+
+// Функция для вычисления значения Z
+double calcZ(double productM, double productC, double productL, double productM2) {
+    double Z = (productM + productC) / (productL - productM2);
+    return Z;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
 
@@ -16,53 +66,27 @@ int main() {
     vector<int> L(sizeL);
     vector<int> C(sizeC);
 
-    // Задаем значения массива M
-    cout << "Введите элементы массива M (8 элементов): ";
-    for (int i = 0; i < sizeM; ++i) {
-        cin >> M[i];
-    }
+    // Ввод элементов массивов
+    inputVector(M, sizeM, "M");
+    inputVector(L, sizeL, "L");
+    inputVector(C, sizeC, "C");
 
-    // Задаем значения массива L
-    cout << "Введите элементы массива L (7 элементов): ";
-    for (int j = 0; j < sizeL; ++j) {
-        cin >> L[j];
-    }
-
-    // Задаем значения массива C
-    cout << "Введите элементы массива C (9 элементов): ";
-    for (int k = 0; k < sizeC; ++k) {
-        cin >> C[k];
-    }
-
-    // Вычисляем произведение (m_i - 1) для массива M
-    long long productM = 1;
-    for (int i = 0; i < sizeM; ++i) {
-        productM *= (M[i] - 1);
-    }
-
-    // Вычисляем произведение (c_k - 5) для массива C
-    long long productC = 1;
-    for (int k = 0; k < sizeC; ++k) {
-        productC *= (C[k] - 5);
-    }
-
-    // Вычисляем произведение l_j для массива L
-    long long productL = 1;
-    for (int j = 0; j < sizeL; ++j) {
-        productL *= L[j];
-    }
-
-    // Вычисляем произведение m_i для массива M
-    long long productM2 = 1;
-    for (int i = 0; i < sizeM; ++i) {
-        productM2 *= M[i];
-    }
+    // Вычисляем произведения
+    double productM = calcMProduct(M, sizeM);
+    double productC = calcCProduct(C, sizeC);
+    double productL = calcLProduct(L, sizeL);
+    double productM2 = calcMDirectProduct(M, sizeM);
 
     // Вычисляем значение Z
-    double Z = static_cast<double>(productM + productC) / (productL - productM2);
+    double Z = calcZ(productM, productC, productL, productM2);
 
     // Выводим результат
     cout << "Значение Z: " << Z << endl;
 
     return 0;
 }
+
+ // M = {1, 2, 2, 2, 2, 2, 2, 2}
+ // L = {3, 3, 3, 3, 3, 3, 3} 
+ // C = {5, 6, 6, 6, 6, 6, 6, 6, 6}
+ // Ожидаемый результат: Z = 0
