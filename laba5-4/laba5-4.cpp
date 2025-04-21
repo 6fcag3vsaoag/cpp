@@ -4,7 +4,7 @@
 #include <clocale> // Для настройки локали
 
 int main() {
-    setlocale(LC_ALL, ""); // Устанавливаем локаль системы
+    setlocale(LC_ALL, "Russian"); // Устанавливаем локаль системы
 
     std::string text;
     int sum = 0;

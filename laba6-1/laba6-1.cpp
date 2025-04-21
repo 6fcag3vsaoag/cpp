@@ -1,6 +1,5 @@
 ﻿#include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -56,7 +55,7 @@ void printChangePositions(const vector<double>& arr) {
 
 // Основная функция
 int main() {
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "Russian");
 
     vector<double> arr = { -1.5, 2.0, -3.1, 4.2, -5.3, 6.4, -7.5, 8.6, -9.7, 10.8 };
 
