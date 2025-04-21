@@ -1,11 +1,9 @@
 ﻿#include <iostream>
 #include <vector>
-#include <locale> // Для поддержки русской локализации
 
 using namespace std;
 
 int main() {
-    // Устанавливаем русскую локализацию
     setlocale(LC_ALL, "Russian");
 
     // Задаем размеры массивов
