@@ -4,22 +4,23 @@
 using namespace std;
 
 int main() {
-	setlocale(LC_ALL, "Russian");
+    setlocale(LC_ALL, "Russian");
 
-	//создание обьекта класса Disciple
-	Disciple OOP;
+    // Создание объекта через указатель
+    Disciple* OOP = new Disciple(); // Объект на куче
 
-	// установка значений Для обьекта OOP через сеттеры
-	OOP.setName("Обьектно-ориентированное Программирование на C++");
-	OOP.setLectures(30);
-	OOP.setPractice(30);
-	OOP.setLabs(30);
+    // Установка значений через сеттеры
+    OOP->setName("Объектно-ориентированное Программирование на C++");
+    OOP->setLectures(30);
+    OOP->setPractice(30);
+    OOP->setLabs(30);
 
-	//вывод информации о дисциплине
-	cout << "Дисциплина:" << OOP.getName() << endl;
-	cout << "Общее Количество часов по дисциплине: " << OOP.GetHours() << endl;
+    // Вывод информации
+    cout << "Дисциплина: " << OOP->getName() << endl;
+    cout << "Общее количество часов: " << OOP->GetHours() << endl;
 
-	return 0;
+	// Освобождение памяти так как создан объект на куче
+    delete OOP;
 
+    return 0;
 }
-
